@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+build/
 
 # Test binary, built with `go test -c`
 *.test
@@ -13,3 +14,12 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# IDEA files
+.idea
+
+# OSX dir files
+.DS_Store
+
+# Log
+*.log
