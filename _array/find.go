@@ -1,0 +1,38 @@
+// 查找算法
+package main
+
+import (
+	"fmt"
+)
+
+// 顺序查找
+func order(arr [6]int, element int) (idx int) {
+	for idx, val := range arr {
+		if val == element {
+			return idx
+		}
+	}
+	return -1
+}
+
+// 折半查找
+func binary(arr *[6]int, left, right, val int) {
+	if left > right {
+		fmt.Println("不合法的数组")
+	}
+
+	middle := (left + right) / 2
+	if (*arr)[middle] > val {
+		binary(arr, left, middle-1, val)
+	} else if (*arr)[middle] < val {
+		binary(arr, middle+1, right, val)
+	} else {
+		fmt.Printf("%v的下标为: %v", val, middle)
+	}
+}
+
+func main() {
+	arr := [...]int{1, 2, 3, 5, 8, 10}
+	//idx := order(arr, 5)
+	binary(&arr, 0, len(arr)-1, 8)
+}
