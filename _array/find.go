@@ -18,7 +18,7 @@ func order(arr [6]int, element int) (idx int) {
 // 折半查找
 func binary(arr *[6]int, left, right, val int) int {
 	if left > right {
-		fmt.Println("不合法的数组")
+		return -1
 	}
 
 	middle := (left + right) / 2
@@ -34,5 +34,6 @@ func binary(arr *[6]int, left, right, val int) int {
 func main() {
 	arr := [...]int{1, 2, 3, 5, 8, 10}
 	//idx := order(arr, 5)
-	binary(&arr, 0, len(arr)-1, 8)
+	idx := binary(&arr, 0, len(arr)-1, 8)
+	fmt.Println(idx)
 }
