@@ -53,4 +53,5 @@ var name[数量][数量]类型
 # 其他申明方法和一维数组是一样的
 ~~~
 **内存图**
+
 ![二维数组内存图](https://user-images.githubusercontent.com/108675790/179692485-2ff86c30-38dc-455d-9471-18cba713aa07.png)
