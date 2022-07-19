@@ -16,18 +16,18 @@ func order(arr [6]int, element int) (idx int) {
 }
 
 // 折半查找
-func binary(arr *[6]int, left, right, val int) {
+func binary(arr *[6]int, left, right, val int) int {
 	if left > right {
 		fmt.Println("不合法的数组")
 	}
 
 	middle := (left + right) / 2
 	if (*arr)[middle] > val {
-		binary(arr, left, middle-1, val)
+		return binary(arr, left, middle-1, val)
 	} else if (*arr)[middle] < val {
-		binary(arr, middle+1, right, val)
+		return binary(arr, middle+1, right, val)
 	} else {
-		fmt.Printf("%v的下标为: %v", val, middle)
+		return middle
 	}
 }
 
