@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 // 猫的结构体
 type Cat struct {
@@ -42,7 +45,38 @@ func Create() {
 	fmt.Println(p3.Age)
 }
 
+// 结构体相互转换
+func transform() {
+	type A struct {
+		Num int
+	}
+	type B struct {
+		Num int
+	}
+	var a A
+	a.Num = 2
+	var b B
+	b.Num = 5
+	a = A(b)
+	fmt.Printf("%v", a.Num)
+}
+
+// 结构体tag
+func Tag() {
+	type Monster struct {
+		Name  string `json:"name"`
+		Skill string `json:"skill"`
+		Age   int    `json:"age"`
+	}
+
+	obj := Monster{"熏悟空", "飞", 100}
+	jsonStr, _ := json.Marshal(obj)
+	fmt.Printf("%T", string(jsonStr))
+}
+
 func main() {
 	//test()
-	Create()
+	//Create()
+	//transform()
+	Tag()
 }
