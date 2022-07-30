@@ -11,7 +11,7 @@ type B interface {
 	Working()
 }
 
-// 空接口people
+// 空结构体people
 type People struct{}
 
 func (peo *People) Speak() {
