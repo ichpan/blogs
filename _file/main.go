@@ -56,11 +56,75 @@ func Single(path string) {
 	fmt.Println(string(content))
 }
 
+// 文件读写
+func ReadWrite() {
+	file, err := os.OpenFile("_file/test2014.txt", os.O_RDWR|os.O_CREATE, 0666)
+	if err != nil {
+		return
+	}
+	defer file.Close()
+
+	// 读取文件
+	reader := bufio.NewReader(file)
+	for {
+		str, err := reader.ReadString('\n')
+		if err == io.EOF {
+			break
+		}
+		fmt.Print(str)
+	}
+
+	// 写入内容
+	str := "hello world123!\n"
+	writer := bufio.NewWriter(file)
+	for i := 0; i < 5; i++ {
+		writer.WriteString(str)
+	}
+	writer.Flush()
+}
+
+// 判断文件是否存在
+func FileIsExist() (bool, error) {
+	_, err := os.Stat("_file/test1.txt")
+	if err != nil {
+		return false, nil
+	}
+	if os.IsNotExist(err) {
+		return false, err
+	}
+	return true, err
+}
+
+// 文件拷贝
+func CopyFile(dst, src string) (written int64, err error) {
+	srcFile, err := os.Open(src)
+	if err != nil {
+		return 0, err
+	}
+	defer srcFile.Close()
+
+	reader := bufio.NewReader(srcFile)
+	dstFile, err := os.OpenFile(dst, os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		return 0, err
+	}
+
+	writer := bufio.NewWriter(dstFile)
+	defer dstFile.Close()
+	return io.Copy(writer, reader)
+}
+
 func main() {
 	//OpenFile()
 	//err := Buffer("_file/test.txt")
 	//if err != nil {
 	//	fmt.Println(err)
 	//}
-	Single("_file/test.txt")
+	//Single("_file/test.txt")
+	//ReadWrite()
+	exist, err := FileIsExist()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(exist)
 }
