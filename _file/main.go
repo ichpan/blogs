@@ -114,6 +114,48 @@ func CopyFile(dst, src string) (written int64, err error) {
 	return io.Copy(writer, reader)
 }
 
+// 记录英文、数字、空格、其他字符的个数
+type CharCount struct {
+	EnCount, NumCount, SpaceCount, OtherCount int
+}
+
+// 统计文件中字符的个数
+func CountChar(filepath string) {
+	file, err := os.Open(filepath)
+	if err != nil {
+		fmt.Printf("%v", err)
+		return
+	}
+	defer file.Close()
+
+	var count CharCount
+
+	reader := bufio.NewReader(file)
+	for {
+		str, err := reader.ReadString('\n')
+		if err == io.EOF {
+			break
+		}
+		for _, val := range str {
+			switch {
+			case val >= 'a' && val <= 'z':
+				fallthrough
+			case val >= 'a' && val <= 'z':
+				count.EnCount++
+			case val == ' ' || val == '\t':
+				count.SpaceCount++
+			case val >= 0 || val <= 9:
+				count.SpaceCount++
+			case val == ' ' || val == '\t':
+				count.NumCount++
+			default:
+				count.OtherCount++
+			}
+		}
+	}
+	fmt.Println(count)
+}
+
 func main() {
 	//OpenFile()
 	//err := Buffer("_file/test.txt")
@@ -122,9 +164,12 @@ func main() {
 	//}
 	//Single("_file/test.txt")
 	//ReadWrite()
-	exist, err := FileIsExist()
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(exist)
+	//exist, err := FileIsExist()
+	//if err != nil {
+	//	fmt.Println(err)
+	//}
+	//fmt.Println(exist)
+
+	filepath := "_file/test.txt"
+	CountChar(filepath)
 }
