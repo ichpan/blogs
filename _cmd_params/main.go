@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// go run main.go 参数1 参数2
+	// go run calc_test.go 参数1 参数2
 	//params := os.Args
 	//fmt.Printf("%v\n", params[1])
 
