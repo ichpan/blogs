@@ -2,14 +2,14 @@ package main
 
 import "fmt"
 
-func calc(c chan bool) int {
+// 计算1-100的和
+func calc(c chan bool) {
 	total := 0
-	for i := 0; i < 10000; i++ {
+	for i := 0; i <= 100; i++ {
 		total += i
 	}
-	c <- true
 	fmt.Printf("%v", total)
-	return total
+	c <- true
 }
 
 func main() {
